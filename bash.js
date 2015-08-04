@@ -7,7 +7,6 @@ var cmdList;
 
 var callNextCmd = function(stdin){
 	var inputs = cmdList.shift().split(" ");
-
 	var cmd = inputs[0];
 	var args = inputs.slice(1);
 	args.unshift(done);
@@ -20,22 +19,9 @@ var callNextCmd = function(stdin){
 
 
 process.stdin.on("data", function(data){
-	//var inputs = data.toString().trim().split(" ");
-
 	var cmdString = data.toString().trim();
 	cmdList = cmdString.split(/\s*\|\s*/g);
-
 	callNextCmd();
-	// var inputs = cmdList.pop().split(" ");
-
-	// var cmd = inputs[0];
-	// var args = inputs.slice(1);
-	// args.unshift(done);
-
-	// if(cmds[cmd]){
-	// 	cmds[cmd].apply(this, args);
-	// }
-
 });
 
 
