@@ -42,83 +42,29 @@ var commands = {
 			return input.split("\n").slice(0, 5).join("\n");
 		});
 
-
-		// var innerFunc = function(input){
-		// 	callback(input.split("\n").slice(0, 5).join("\n"));
-		// };
-
-		// if(stdin){
-		// 	innerFunc(stdin);
-		// }else {
-		// 	fs.readFile(file, "utf8", function(err, data){
-		// 		innerFunc(data);
-		// 	});
-		// }
-
-
 	},
 
 	tail: function(stdin, callback, file){
-
 
 		innerHelper(stdin, callback, file, function(input){
 			return input.split("\n").slice(-5).join("\n");
 		});
 
-
-		// var innerFunc = function(input){
-		// 	callback(input.split("\n").slice(-5).join("\n"));
-		// };
-
-		// if(stdin){
-		// 	innerFunc(stdin);
-		// }else {
-		// 	fs.readFile(file, "utf8", function(err, data){
-		// 		innerFunc(data);
-		// 	});
-		// }
-
 	},
 
 	sort: function(stdin, callback, file){
-
 
 		innerHelper(stdin, callback, file, function(input){
 			return input.split("\n").sort().join("\n");
 		});
 
-		// var innerFunc = function(input){
-		// 	callback(input.split("\n").sort().join("\n"));
-		// };
-
-		// if(stdin){
-		// 	innerFunc(stdin);
-		// }else {
-		// 	fs.readFile(file, "utf8", function(err, data){
-		// 		innerFunc(data);
-		// 	});
-		// }
-
 	},
 
 	wc: function(stdin, callback, file){
 
-
 		innerHelper(stdin, callback, file, function(input){
 			return input.split("\n").length;
 		});
-
-		// var wcFunc = function(input){
-		// 	callback(input.split("\n").length);
-		// };
-
-		// if(stdin){
-		// 	wcFunc(stdin);
-		// }else {
-		// 	fs.readFile(file, "utf8", function(err, data){
-		// 		wcFunc(data);
-		// 	});
-		// }
 
 	},
 
@@ -146,19 +92,17 @@ var commands = {
 
 
 var innerHelper = function(stdin, callback, file, func){
+	var innerFunc = function(input){
+		callback(func(input));
+	};
 
-		var innerFunc = function(input){
-			callback(func(input));
-		};
-
-		if(stdin){
-			innerFunc(stdin);
-		}else {
-			fs.readFile(file, "utf8", function(err, data){
-				innerFunc(data);
-			});
-		}
-		
+	if(stdin){
+		innerFunc(stdin);
+	}else {
+		fs.readFile(file, "utf8", function(err, data){
+			innerFunc(data);
+		});
+	}
 };
 
 
